@@ -38,6 +38,9 @@ const FilterSidebar = ({
   priceRange,
   preventRouteChange,
   navigateToFacet,
+  fullWidth,
+  navigationType,
+  initiallyCollapsed,
 }) => {
   const filterContext = useFilterNavigator()
   const [open, setOpen] = useState(false)
@@ -162,7 +165,7 @@ const FilterSidebar = ({
         </span>
       </button>
 
-      <Sidebar onOutsideClick={handleClose} isOpen={open}>
+      <Sidebar onOutsideClick={handleClose} isOpen={open} fullWidth={fullWidth}>
         <FilterNavigatorContext.Provider value={context}>
           <AccordionFilterContainer
             filters={filters}
@@ -170,6 +173,8 @@ const FilterSidebar = ({
             onFilterCheck={handleFilterCheck}
             onCategorySelect={handleUpdateCategories}
             priceRange={priceRange}
+            navigationType={navigationType}
+            initiallyCollapsed={initiallyCollapsed}
           />
           <ExtensionPoint id="sidebar-close-button" onClose={handleClose} />
         </FilterNavigatorContext.Provider>

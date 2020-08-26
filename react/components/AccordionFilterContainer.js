@@ -27,12 +27,18 @@ const AccordionFilterContainer = ({
   tree,
   onCategorySelect,
   priceRange,
+  navigationType,
+  initiallyCollapsed,
 }) => {
   const [openItem, setOpenItem] = useState(null)
   const handles = useCssHandles(CSS_HANDLES)
 
   const handleOpen = id => e => {
     e.preventDefault()
+
+    if (navigationType === 'collapsible') {
+      return
+    }
 
     if (openItem === id) {
       setOpenItem(null)
@@ -99,58 +105,66 @@ const AccordionFilterContainer = ({
         )}
       </div>
 
-      {tree.length > 0 && (
-        <AccordionFilterItem
-          title={CATEGORIES_TITLE}
-          open={departmentsOpen}
-          show={!openItem || departmentsOpen}
-          onOpen={handleOpen(CATEGORIES_TITLE)}
-        >
-          <div className={itemClassName}>
-            <DepartmentFilters
-              tree={tree}
-              isVisible={tree.length > 0}
-              onCategorySelect={onCategorySelect}
-              hideBorder
-            />
-          </div>
-        </AccordionFilterItem>
-      )}
-
-      {nonEmptyFilters.map(filter => {
-        const { type, title } = filter
-        const isOpen = openItem === filter.title
-
-        switch (type) {
-          case 'PriceRanges':
-            return (
-              <AccordionFilterPriceRange
-                title={filter.title}
-                facets={filter.facets}
-                key={title}
-                className={itemClassName}
-                open={isOpen}
-                show={!openItem || isOpen}
-                onOpen={handleOpen(title)}
-                onFilterCheck={onFilterCheck}
-                priceRange={priceRange}
+      <div className="overflow-scroll h-100 pb10">
+        {tree.length > 0 && (
+          <AccordionFilterItem
+            title={CATEGORIES_TITLE}
+            open={departmentsOpen}
+            show={!openItem || departmentsOpen}
+            onOpen={handleOpen(CATEGORIES_TITLE)}
+            navigationType={navigationType}
+            initiallyCollapsed={initiallyCollapsed}
+          >
+            <div className={itemClassName}>
+              <DepartmentFilters
+                tree={tree}
+                isVisible={tree.length > 0}
+                onCategorySelect={onCategorySelect}
+                hideBorder
               />
-            )
-          default:
-            return (
-              <AccordionFilterGroup
-                title={filter.title}
-                facets={filter.facets}
-                key={title}
-                className={itemClassName}
-                open={isOpen}
-                show={!openItem || isOpen}
-                onOpen={handleOpen(title)}
-                onFilterCheck={onFilterCheck}
-              />
-            )
-        }
-      })}
+            </div>
+          </AccordionFilterItem>
+        )}
+
+        {nonEmptyFilters.map(filter => {
+          const { type, title } = filter
+          const isOpen = openItem === filter.title
+
+          switch (type) {
+            case 'PriceRanges':
+              return (
+                <AccordionFilterPriceRange
+                  title={filter.title}
+                  facets={filter.facets}
+                  key={title}
+                  className={itemClassName}
+                  open={isOpen}
+                  show={!openItem || isOpen}
+                  onOpen={handleOpen(title)}
+                  onFilterCheck={onFilterCheck}
+                  priceRange={priceRange}
+                  navigationType={navigationType}
+                  initiallyCollapsed={initiallyCollapsed}
+                />
+              )
+            default:
+              return (
+                <AccordionFilterGroup
+                  title={filter.title}
+                  facets={filter.facets}
+                  key={title}
+                  className={itemClassName}
+                  open={isOpen}
+                  show={!openItem || isOpen}
+                  onOpen={handleOpen(title)}
+                  onFilterCheck={onFilterCheck}
+                  navigationType={navigationType}
+                  initiallyCollapsed={initiallyCollapsed}
+                />
+              )
+          }
+        })}
+      </div>
     </div>
   )
 }
@@ -168,6 +182,10 @@ AccordionFilterContainer.propTypes = {
   priceRange: PropTypes.string,
   tree: PropTypes.any,
   onCategorySelect: PropTypes.func,
+  /** Defines the navigation method: 'page' or 'collapsible' */
+  navigationType: PropTypes.oneOf(['page', 'collapsible']),
+  /** Makes the search filters start out collapsed (`true`) or open (`false`) */
+  initiallyCollapsed: PropTypes.bool,
 }
 
 export default injectIntl(AccordionFilterContainer)

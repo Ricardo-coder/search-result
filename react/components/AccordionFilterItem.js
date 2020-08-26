@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useState } from 'react'
 import PropTypes from 'prop-types'
 import { intlShape, injectIntl } from 'react-intl'
 import classNames from 'classnames'
@@ -7,6 +7,7 @@ import { useCssHandles } from 'vtex.css-handles'
 import { IconCaret } from 'vtex.store-icons'
 
 import { getFilterTitle } from '../constants/SearchHelpers'
+import { Collapse } from 'react-collapse'
 
 const CSS_HANDLES = [
   'accordionFilterContainer',
@@ -28,17 +29,29 @@ const AccordionFilterItem = ({
   quantitySelected = 0,
   intl,
   children,
+  navigationType,
+  initiallyCollapsed,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
+  const isNavigationCollapsible = navigationType === 'collapsible'
+  const [isCollapsed, setIsCollapsed] = useState(initiallyCollapsed)
+
+  const handleOnOpen = e => {
+    if (isNavigationCollapsible) {
+      setIsCollapsed(isCollapsed => !isCollapsed)
+    }
+
+    onOpen(e)
+  }
   const handleKeyDown = e => {
     if (e.key === ' ') {
-      onOpen(e)
+      handleOnOpen(e)
     }
   }
 
   return (
     <Fragment>
-      {!open && (
+      {(!open || isNavigationCollapsible) && (
         <div className={`${handles.accordionFilterContainer} pl7`}>
           <div
             role="button"
@@ -46,18 +59,19 @@ const AccordionFilterItem = ({
             className={classNames(
               handles.accordionFilterItem,
               handles.filterAccordionItemBox,
-              't-body pr5 pv3 pointer bb b--muted-5',
+              't-body pr5 pv3 pointer bb b--muted-5 outline-0',
               {
                 [handles.accordionFilterItemActive]: open,
                 [`${handles.accordionFilterItemHidden} dn`]: !show,
               }
             )}
             onKeyDown={handleKeyDown}
-            onClick={onOpen}
+            onClick={handleOnOpen}
           >
             <div
               className={classNames(
-                handles.accordionFilterContent, 'pv4 c-on-base',
+                handles.accordionFilterContent,
+                'pv4 c-on-base',
                 {
                   't-small': open,
                   't-heading-5': !open,
@@ -78,13 +92,27 @@ const AccordionFilterItem = ({
                 </div>
               )}
               <span className={`${handles.accordionFilterItemIcon} fr`}>
-                <IconCaret orientation="down" size={10} />
+                <IconCaret
+                  orientation={
+                    !isNavigationCollapsible ||
+                    (isNavigationCollapsible && isCollapsed)
+                      ? 'down'
+                      : 'up'
+                  }
+                  size={10}
+                />
               </span>
             </div>
           </div>
         </div>
       )}
-      {open && children}
+      {!isNavigationCollapsible ? (
+        open && children
+      ) : (
+        <Collapse isOpened={!isCollapsed && isNavigationCollapsible}>
+          <div className="pl8">{children}</div>
+        </Collapse>
+      )}
     </Fragment>
   )
 }
@@ -104,6 +132,10 @@ AccordionFilterItem.propTypes = {
   intl: intlShape,
   /** content */
   children: PropTypes.node,
+  /** Defines the navigation method: 'page' or 'collapsible' */
+  navigationType: PropTypes.oneOf(['page', 'collapsible']),
+  /** Makes the search filters start out collapsed (`true`) or open (`false`) */
+  initiallyCollapsed: PropTypes.bool,
 }
 
 export default injectIntl(AccordionFilterItem)

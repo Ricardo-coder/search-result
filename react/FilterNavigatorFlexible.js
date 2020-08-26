@@ -16,6 +16,8 @@ const withSearchPageContextProps = Component => ({
   filtersTitleHtmlTag,
   truncateFilters,
   openFiltersMode,
+  fullWidthOnMobile,
+  navigationTypeOnMobile,
 }) => {
   const {
     searchQuery,
@@ -79,6 +81,8 @@ const withSearchPageContextProps = Component => ({
           filtersTitleHtmlTag={filtersTitleHtmlTag}
           truncateFilters={truncateFilters}
           openFiltersMode={openFiltersMode}
+          fullWidthOnMobile={fullWidthOnMobile}
+          navigationTypeOnMobile={navigationTypeOnMobile}
         />
       </FilterNavigatorContext.Provider>
     </div>

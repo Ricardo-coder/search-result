@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- Prop `fullWidthOnMobile` to the `filter-navigator.v3`.
+- Prop `navigationTypeOnMobile` to the `filter-navigator.v3`.
+
+### Fixed
+- Scroll on mobile not working properly.
+
 ## [3.79.0] - 2020-10-14
 ### Added
 - `"showOrderTitle"` prop to OrderBy
