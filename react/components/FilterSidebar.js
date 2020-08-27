@@ -38,6 +38,7 @@ const FilterSidebar = ({
   priceRange,
   preventRouteChange,
   navigateToFacet,
+  loading,
 }) => {
   const filterContext = useFilterNavigator()
   const [open, setOpen] = useState(false)
@@ -57,6 +58,11 @@ const FilterSidebar = ({
   }
 
   const handleFilterCheck = filter => {
+    if (true && preventRouteChange) {
+      navigateToFacet(filter, preventRouteChange)
+      return
+    }
+
     if (!isFilterSelected(filterOperations, filter)) {
       setFilterOperations(filterOperations.concat(filter))
     } else {
@@ -75,8 +81,13 @@ const FilterSidebar = ({
   }
 
   const handleApply = () => {
-    navigateToFacet(filterOperations, preventRouteChange)
     setOpen(false)
+
+    if (true && preventRouteChange) {
+      return
+    }
+
+    navigateToFacet(filterOperations, preventRouteChange)
     setFilterOperations([])
   }
 
@@ -106,6 +117,11 @@ const FilterSidebar = ({
       op => op.map === MAP_CATEGORY_CHAR
     )
     const newCategories = [...categoriesSelected, ...categories]
+
+    if (true && preventRouteChange) {
+      navigateToFacet(newCategories, preventRouteChange)
+      return
+    }
 
     // Just save the newest operation here to be recorded at the category tree hook and update the tree
     setCategoryTreeOperations(categories)
@@ -170,6 +186,7 @@ const FilterSidebar = ({
             onFilterCheck={handleFilterCheck}
             onCategorySelect={handleUpdateCategories}
             priceRange={priceRange}
+            loading={loading}
           />
           <ExtensionPoint id="sidebar-close-button" onClose={handleClose} />
         </FilterNavigatorContext.Provider>

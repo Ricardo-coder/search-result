@@ -189,6 +189,7 @@ const FilterNavigator = ({
               priceRange={priceRange}
               preventRouteChange={preventRouteChange}
               navigateToFacet={navigateToFacet}
+              loading={loading}
             />
           </div>
         </div>
