@@ -28,6 +28,8 @@ const AccordionFilterItem = ({
   quantitySelected = 0,
   intl,
   children,
+  onClearFilter,
+  facetKey,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const handleKeyDown = e => {
@@ -57,7 +59,8 @@ const AccordionFilterItem = ({
           >
             <div
               className={classNames(
-                handles.accordionFilterContent, 'pv4 c-on-base',
+                handles.accordionFilterContent,
+                'pv4 c-on-base',
                 {
                   't-small': open,
                   't-heading-5': !open,
@@ -76,6 +79,19 @@ const AccordionFilterItem = ({
                 >
                   <Tag>{quantitySelected}</Tag>
                 </div>
+              )}
+              {quantitySelected > 0 && (
+                <span className="dib ml3">
+                  <Tag
+                    size="small"
+                    onClick={e => {
+                      e.stopPropagation()
+                      onClearFilter && onClearFilter(facetKey)
+                    }}
+                  >
+                    Clear
+                  </Tag>
+                </span>
               )}
               <span className={`${handles.accordionFilterItemIcon} fr`}>
                 <IconCaret orientation="down" size={10} />
@@ -104,6 +120,8 @@ AccordionFilterItem.propTypes = {
   intl: intlShape,
   /** content */
   children: PropTypes.node,
+  onClearFilter: PropTypes.func,
+  facetKey: PropTypes.string,
 }
 
 export default injectIntl(AccordionFilterItem)

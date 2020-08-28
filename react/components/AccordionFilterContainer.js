@@ -29,6 +29,7 @@ const AccordionFilterContainer = ({
   onCategorySelect,
   priceRange,
   loading,
+  onClearFilter,
 }) => {
   const [openItem, setOpenItem] = useState(null)
   const handles = useCssHandles(CSS_HANDLES)
@@ -114,6 +115,7 @@ const AccordionFilterContainer = ({
           open={departmentsOpen}
           show={!openItem || departmentsOpen}
           onOpen={handleOpen(CATEGORIES_TITLE)}
+          onClearFilter={onClearFilter}
         >
           <div className={itemClassName}>
             <DepartmentFilters
@@ -156,6 +158,7 @@ const AccordionFilterContainer = ({
                 show={!openItem || isOpen}
                 onOpen={handleOpen(title)}
                 onFilterCheck={onFilterCheck}
+                onClearFilter={onClearFilter}
               />
             )
         }
@@ -186,6 +189,7 @@ AccordionFilterContainer.propTypes = {
   tree: PropTypes.any,
   onCategorySelect: PropTypes.func,
   loading: PropTypes.bool,
+  onClearFilter: PropTypes.func,
 }
 
 export default injectIntl(AccordionFilterContainer)
