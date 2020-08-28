@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { intlShape, injectIntl } from 'react-intl'
+import { intlShape, injectIntl, FormattedMessage } from 'react-intl'
 import classNames from 'classnames'
 import { Tag } from 'vtex.styleguide'
 import { useCssHandles } from 'vtex.css-handles'
@@ -90,7 +90,7 @@ const AccordionFilterItem = ({
                       onClearFilter && onClearFilter(facetKey)
                     }}
                   >
-                    Clear
+                    <FormattedMessage id="store/search-result.filter-button.clear" />
                   </Tag>
                 </span>
               )}
