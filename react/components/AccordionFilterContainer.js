@@ -30,6 +30,7 @@ const AccordionFilterContainer = ({
   priceRange,
   loading,
   onClearFilter,
+  showClearByFilter,
 }) => {
   const [openItem, setOpenItem] = useState(null)
   const handles = useCssHandles(CSS_HANDLES)
@@ -159,6 +160,7 @@ const AccordionFilterContainer = ({
                 onOpen={handleOpen(title)}
                 onFilterCheck={onFilterCheck}
                 onClearFilter={onClearFilter}
+                showClearByFilter={showClearByFilter}
               />
             )
         }
@@ -189,7 +191,10 @@ AccordionFilterContainer.propTypes = {
   tree: PropTypes.any,
   onCategorySelect: PropTypes.func,
   loading: PropTypes.bool,
+  /** Clear filter function */
   onClearFilter: PropTypes.func,
+  /** Whether a clear button that clear all options in a specific filter should appear beside the filter's name (true) or not (false). */
+  showClearByFilter: PropTypes.bool,
 }
 
 export default injectIntl(AccordionFilterContainer)
