@@ -76,6 +76,7 @@ const FilterNavigator = ({
   scrollToTop = 'none',
   openFiltersMode = 'many',
   filtersFetchMore,
+  priceRangeLayout = 'default',
 }) => {
   const { isMobile } = useDevice()
   const handles = useCssHandles(CSS_HANDLES)
@@ -189,6 +190,7 @@ const FilterNavigator = ({
               priceRange={priceRange}
               preventRouteChange={preventRouteChange}
               navigateToFacet={navigateToFacet}
+              priceRangeLayout={priceRangeLayout}
             />
           </div>
         </div>
@@ -229,6 +231,7 @@ const FilterNavigator = ({
               setTruncatedFacetsFetched={setTruncatedFacetsFetched}
               truncateFilters={truncateFilters}
               openFiltersMode={openFiltersMode}
+              priceRangeLayout={priceRangeLayout}
             />
           </div>
           <ExtensionPoint id="shop-review-summary" />

@@ -27,6 +27,7 @@ const AccordionFilterContainer = ({
   tree,
   onCategorySelect,
   priceRange,
+  priceRangeLayout,
 }) => {
   const [openItem, setOpenItem] = useState(null)
   const handles = useCssHandles(CSS_HANDLES)
@@ -134,6 +135,7 @@ const AccordionFilterContainer = ({
                 onOpen={handleOpen(title)}
                 onFilterCheck={onFilterCheck}
                 priceRange={priceRange}
+                priceRangeLayout={priceRangeLayout}
               />
             )
           default:
@@ -168,6 +170,8 @@ AccordionFilterContainer.propTypes = {
   priceRange: PropTypes.string,
   tree: PropTypes.any,
   onCategorySelect: PropTypes.func,
+  /** Price range layout (default or inputAndSlider) */
+  priceRangeLayout: PropTypes.string,
 }
 
 export default injectIntl(AccordionFilterContainer)

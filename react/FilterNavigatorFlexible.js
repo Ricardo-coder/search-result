@@ -16,6 +16,7 @@ const withSearchPageContextProps = Component => ({
   filtersTitleHtmlTag,
   truncateFilters,
   openFiltersMode,
+  priceRangeLayout,
 }) => {
   const {
     searchQuery,
@@ -79,6 +80,7 @@ const withSearchPageContextProps = Component => ({
           filtersTitleHtmlTag={filtersTitleHtmlTag}
           truncateFilters={truncateFilters}
           openFiltersMode={openFiltersMode}
+          priceRangeLayout={priceRangeLayout}
         />
       </FilterNavigatorContext.Provider>
     </div>

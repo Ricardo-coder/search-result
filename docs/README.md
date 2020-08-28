@@ -292,6 +292,7 @@ Check out the [**Product Summary documentation**](https://vtex.io/docs/component
 | `filtersTitleHtmlTag` | `string` | HTML tag for the filter's title. | `h5` |
 | `scrollToTop` | `enum` | Scrolls the page to the top (`auto` or `smooth`) or not (`none`) when selecting a facet. | `none` |
 | `truncateFilters` | `boolean` | Whether a filter selector with more than 10 filter options should shorten the list and display a `See more` button (`true`) or not (`false`). | `false` |
+| `priceRangeLayout` | `"default"` or `inputAndSlider` | whether a text field should appear to enter the price range (`"inputAndSlider"`), or not (`"default"`). | `"default"` |
 
 -  **`order-by` block**
 
