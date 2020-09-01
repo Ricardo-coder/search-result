@@ -15,7 +15,6 @@ const CSS_HANDLES = [
   'filterBreadcrumbsItemName',
   'filterBreadcrumbsContent',
   'filterBreadcrumbsText',
-  'filterBreadcrumbsList',
 ]
 import styles from '../searchResult.css'
 
@@ -64,7 +63,11 @@ const AccordionFilterContainer = ({
   )
 
   return (
-    <div className={classNames(styles.accordionFilter, 'h-100')}>
+    <div
+      className={classNames(styles.accordionFilter, 'h-100 pb9', {
+        'overflow-scroll': !openItem,
+      })}
+    >
       <div
         className={classNames(
           styles.filterAccordionBreadcrumbs,
@@ -106,71 +109,64 @@ const AccordionFilterContainer = ({
         )}
       </div>
 
-      <div
-        className={classNames(
-          handles.filterBreadcrumbsList,
-          'overflow-scroll h-100 pb10'
-        )}
-      >
-        {tree.length > 0 && (
-          <AccordionFilterItem
-            title={CATEGORIES_TITLE}
-            open={departmentsOpen}
-            show={!openItem || departmentsOpen}
-            onOpen={handleOpen(CATEGORIES_TITLE)}
-            navigationType={navigationType}
-            initiallyCollapsed={initiallyCollapsed}
-          >
-            <div className={itemClassName}>
-              <DepartmentFilters
-                tree={tree}
-                isVisible={tree.length > 0}
-                onCategorySelect={onCategorySelect}
-                hideBorder
+      {tree.length > 0 && (
+        <AccordionFilterItem
+          title={CATEGORIES_TITLE}
+          open={departmentsOpen}
+          show={!openItem || departmentsOpen}
+          onOpen={handleOpen(CATEGORIES_TITLE)}
+          navigationType={navigationType}
+          initiallyCollapsed={initiallyCollapsed}
+        >
+          <div className={itemClassName}>
+            <DepartmentFilters
+              tree={tree}
+              isVisible={tree.length > 0}
+              onCategorySelect={onCategorySelect}
+              hideBorder
+            />
+          </div>
+        </AccordionFilterItem>
+      )}
+
+      {nonEmptyFilters.map(filter => {
+        const { type, title } = filter
+        const isOpen = openItem === filter.title
+
+        switch (type) {
+          case 'PriceRanges':
+            return (
+              <AccordionFilterPriceRange
+                title={filter.title}
+                facets={filter.facets}
+                key={title}
+                className={itemClassName}
+                open={isOpen}
+                show={!openItem || isOpen}
+                onOpen={handleOpen(title)}
+                onFilterCheck={onFilterCheck}
+                priceRange={priceRange}
+                navigationType={navigationType}
+                initiallyCollapsed={initiallyCollapsed}
               />
-            </div>
-          </AccordionFilterItem>
-        )}
-
-        {nonEmptyFilters.map(filter => {
-          const { type, title } = filter
-          const isOpen = openItem === filter.title
-
-          switch (type) {
-            case 'PriceRanges':
-              return (
-                <AccordionFilterPriceRange
-                  title={filter.title}
-                  facets={filter.facets}
-                  key={title}
-                  className={itemClassName}
-                  open={isOpen}
-                  show={!openItem || isOpen}
-                  onOpen={handleOpen(title)}
-                  onFilterCheck={onFilterCheck}
-                  priceRange={priceRange}
-                  navigationType={navigationType}
-                  initiallyCollapsed={initiallyCollapsed}
-                />
-              )
-            default:
-              return (
-                <AccordionFilterGroup
-                  title={filter.title}
-                  facets={filter.facets}
-                  key={title}
-                  className={itemClassName}
-                  open={isOpen}
-                  show={!openItem || isOpen}
-                  onOpen={handleOpen(title)}
-                  onFilterCheck={onFilterCheck}
-                  navigationType={navigationType}
-                  initiallyCollapsed={initiallyCollapsed}
-                />
-              )
-          }
-        })}
-      </div>
+            )
+          default:
+            return (
+              <AccordionFilterGroup
+                title={filter.title}
+                facets={filter.facets}
+                key={title}
+                className={itemClassName}
+                open={isOpen}
+                show={!openItem || isOpen}
+                onOpen={handleOpen(title)}
+                onFilterCheck={onFilterCheck}
+                navigationType={navigationType}
+                initiallyCollapsed={initiallyCollapsed}
+              />
+            )
+        }
+      })}
     </div>
   )
 }
