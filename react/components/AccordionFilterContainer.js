@@ -15,6 +15,7 @@ const CSS_HANDLES = [
   'filterBreadcrumbsItemName',
   'filterBreadcrumbsContent',
   'filterBreadcrumbsText',
+  'filterBreadcrumbsList',
 ]
 import styles from '../searchResult.css'
 
@@ -105,7 +106,12 @@ const AccordionFilterContainer = ({
         )}
       </div>
 
-      <div className="overflow-scroll h-100 pb10">
+      <div
+        className={classNames(
+          handles.filterBreadcrumbsList,
+          'overflow-scroll h-100 pb10'
+        )}
+      >
         {tree.length > 0 && (
           <AccordionFilterItem
             title={CATEGORIES_TITLE}
