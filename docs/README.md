@@ -292,8 +292,8 @@ Check out the [**Product Summary documentation**](https://vtex.io/docs/component
 | `filtersTitleHtmlTag` | `string` | HTML tag for the filter's title. | `h5` |
 | `scrollToTop` | `enum` | Scrolls the page to the top (`auto` or `smooth`) or not (`none`) when selecting a facet. | `none` |
 | `truncateFilters` | `boolean` | Whether a filter selector with more than 10 filter options should shorten the list and display a `See more` button (`true`) or not (`false`). | `false` |
-| `fullWidthOnMobile`      | `Boolean` | Defines if the `filter-navigator` will occupy the entire length of the window on mobile (`true`) or not (`false`)                                                                                                                                                 | `false`       |
-| `navigationTypeOnMobile` | `Enum`    | Defines the navigation method on Mobile. `page` or `collapsible` 
+| `fullWidthOnMobile`      | `boolean` | Whether the `filter-navigator.v3` will be rendered on mobile using the screen full width (`true`) or not (`false`).  | `false`       |
+| `navigationTypeOnMobile` | `enum` | Defines how mobile users should navigate on the filter selector component. Possible values are: `page` or `collapsible`. | `page`        |
 
 -  **`order-by` block**
 
