@@ -29,6 +29,7 @@ const AccordionFilterContainer = ({
   priceRange,
   navigationType,
   initiallyCollapsed,
+  truncateFilters,
 }) => {
   const [openItem, setOpenItem] = useState(null)
   const handles = useCssHandles(CSS_HANDLES)
@@ -59,7 +60,8 @@ const AccordionFilterContainer = ({
 
   const itemClassName = classNames(
     styles.accordionFilterItemOptions,
-    'ph5 pt3 h-100 overflow-scroll'
+    'ph5 pt3 h-100 overflow-scroll',
+    { pb9: navigationType !== 'collapsible' }
   )
 
   return (
@@ -163,6 +165,7 @@ const AccordionFilterContainer = ({
                 onFilterCheck={onFilterCheck}
                 navigationType={navigationType}
                 initiallyCollapsed={initiallyCollapsed}
+                truncateFilters={truncateFilters}
               />
             )
         }
@@ -188,6 +191,8 @@ AccordionFilterContainer.propTypes = {
   navigationType: PropTypes.oneOf(['page', 'collapsible']),
   /** Makes the search filters start out collapsed (`true`) or open (`false`) */
   initiallyCollapsed: PropTypes.bool,
+  /** If filters start truncated */
+  truncateFilters: PropTypes.bool,
 }
 
 export default injectIntl(AccordionFilterContainer)

@@ -41,6 +41,7 @@ const FilterSidebar = ({
   fullWidth,
   navigationType,
   initiallyCollapsed,
+  truncateFilters,
 }) => {
   const filterContext = useFilterNavigator()
   const [open, setOpen] = useState(false)
@@ -175,6 +176,7 @@ const FilterSidebar = ({
             priceRange={priceRange}
             navigationType={navigationType}
             initiallyCollapsed={initiallyCollapsed}
+            truncateFilters={truncateFilters}
           />
           <ExtensionPoint id="sidebar-close-button" onClose={handleClose} />
         </FilterNavigatorContext.Provider>
