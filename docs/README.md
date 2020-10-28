@@ -293,7 +293,7 @@ Check out the [**Product Summary documentation**](https://vtex.io/docs/component
 | `scrollToTop` | `enum` | Scrolls the page to the top (`auto` or `smooth`) or not (`none`) when selecting a facet. | `none` |
 | `truncateFilters` | `boolean` | Whether a filter selector with more than 10 filter options should shorten the list and display a `See more` button (`true`) or not (`false`). | `false` |
 | `updateOnFilterSelectionOnMobile` | `boolean` | Whether the search results on mobile should be updated according to filter selection (`true`) or not (`false`). Notice: this prop only works if the `preventRouteChange` prop is declared as `true`.                                                                        | `false`       |
-| `showClearByFilterOnMobile`       | `boolean` | Whether a clear button (responsible for erasing all filter options selected by the user) should be displayed alongside the filter name (`true`) or not (`false`).                                                                                                                              | `false`       |
+| `showClearByFilter`       | `boolean` | Whether a clear button (responsible for erasing all filter options selected by the user) should be displayed alongside the filter name (`true`) or not (`false`).                                                                                                                              | `false`       |
 
 -  **`order-by` block**
 

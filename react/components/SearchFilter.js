@@ -43,6 +43,7 @@ const SearchFilter = ({
       openFiltersMode={openFiltersMode}
       truncatedFacetsFetched={truncatedFacetsFetched}
       setTruncatedFacetsFetched={setTruncatedFacetsFetched}
+      navigateToFacet={navigateToFacet}
     >
       {facet => (
         <FacetItem

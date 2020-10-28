@@ -14,6 +14,7 @@ import { FormattedMessage } from 'react-intl'
 import { useRuntime } from 'vtex.render-runtime'
 import { IconCaret } from 'vtex.store-icons'
 import { useCssHandles } from 'vtex.css-handles'
+import { Tag } from 'vtex.styleguide'
 
 import styles from '../searchResult.css'
 import { SearchFilterBar } from './SearchFilterBar'
@@ -79,6 +80,7 @@ const FilterOptionTemplate = ({
   openFiltersMode,
   truncatedFacetsFetched,
   setTruncatedFacetsFetched,
+  navigateToFacet,
 }) => {
   const [open, setOpen] = useState(!initiallyCollapsed)
   const { getSettings } = useRuntime()
@@ -116,6 +118,11 @@ const FilterOptionTemplate = ({
     }
     setTruncated(value)
   }
+
+  const handleClear = useCallback(
+    () => navigateToFacet(filters.filter(filter => filter.selected)),
+    [navigateToFacet, filters]
+  )
 
   const renderChildren = () => {
     if (typeof children !== 'function') {
@@ -176,6 +183,9 @@ const FilterOptionTemplate = ({
     }
   }, [lastOpenFilter, open, openFiltersMode, setLastOpenFilter, title])
 
+  const showClearButton =
+    !selected && filters && filters.some(filter => filter.selected)
+
   const handleKeyDown = useCallback(
     e => {
       if (e.key === ' ' && collapsable) {
@@ -218,7 +228,22 @@ const FilterOptionTemplate = ({
           aria-disabled={!collapsable}
         >
           <div className={titleClassName}>
-            {title}
+            <span>
+              {title}
+              {showClearButton && (
+                <span className="ml2">
+                  <Tag
+                    size="small"
+                    onClick={e => {
+                      e.stopPropagation()
+                      handleClear()
+                    }}
+                  >
+                    <FormattedMessage id="store/search-result.filter-button.clear" />
+                  </Tag>
+                </span>
+              )}
+            </span>
             {collapsable && (
               <span
                 className={classNames(
@@ -296,6 +321,7 @@ FilterOptionTemplate.propTypes = {
   setTruncatedFacetsFetched: PropTypes.func,
   /** Quantity of facets of the current filter */
   quantity: PropTypes.number,
+  navigateToFacet: PropTypes.func,
 }
 
 export default FilterOptionTemplate

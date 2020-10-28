@@ -21,7 +21,7 @@ const AccordionFilterGroup = ({
   onOpen,
   onFilterCheck,
   onClearFilter,
-  showClearByFilterOnMobile,
+  showClearByFilter,
 }) => {
   const handles = useCssHandles(CSS_HANDLES)
   const filters = useSelectedFilters(facets)
@@ -41,7 +41,7 @@ const AccordionFilterGroup = ({
       quantitySelected={quantitySelected}
       onFilterCheck={onFilterCheck}
       onClearFilter={onClearFilter}
-      showClearByFilterOnMobile={showClearByFilterOnMobile}
+      showClearByFilter={showClearByFilter}
     >
       <div
         className={classNames(

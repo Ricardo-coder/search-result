@@ -40,7 +40,7 @@ const FilterSidebar = ({
   navigateToFacet,
   loading,
   updateOnFilterSelectionOnMobile,
-  showClearByFilterOnMobile,
+  showClearByFilter,
 }) => {
   const filterContext = useFilterNavigator()
   const [open, setOpen] = useState(false)
@@ -201,7 +201,7 @@ const FilterSidebar = ({
             priceRange={priceRange}
             loading={loading}
             onClearFilter={handleClearFilters}
-            showClearByFilterOnMobile={showClearByFilterOnMobile}
+            showClearByFilter={showClearByFilter}
             updateOnFilterSelectionOnMobile={updateOnFilterSelectionOnMobile}
           />
           <ExtensionPoint id="sidebar-close-button" onClose={handleClose} />

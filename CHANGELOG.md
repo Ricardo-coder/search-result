@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - `updateOnFilterSelectionOnMobile` prop to the `FilterNavigator`.
-- `showClearByFilterOnMobile` prop to the `FilterNavigator`.
+- `showClearByFilter` prop to the `FilterNavigator`.
 
 ## [3.79.0] - 2020-10-14
 ### Added

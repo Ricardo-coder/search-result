@@ -77,7 +77,7 @@ const FilterNavigator = ({
   openFiltersMode = 'many',
   filtersFetchMore,
   updateOnFilterSelectionOnMobile = false,
-  showClearByFilterOnMobile = false,
+  showClearByFilter = false,
 }) => {
   const { isMobile } = useDevice()
   const handles = useCssHandles(CSS_HANDLES)
@@ -193,7 +193,7 @@ const FilterNavigator = ({
               navigateToFacet={navigateToFacet}
               loading={loading}
               updateOnFilterSelectionOnMobile={updateOnFilterSelectionOnMobile}
-              showClearByFilterOnMobile={showClearByFilterOnMobile}
+              showClearByFilter={showClearByFilter}
             />
           </div>
         </div>
